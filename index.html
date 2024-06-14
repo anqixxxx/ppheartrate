@@ -126,6 +126,16 @@
   }
   </style>
 
+  <style>
+  .cloud a {
+    color: #FFD700; /* Gold color for better visibility */
+  }
+    
+  .cloud a:visited {
+    color: #FFD700; /* Gold color for visited links */
+  }
+  </style>
+
   <div id="analysis1" style="display: none;">
     <div class="container">
       <div class="header">
@@ -177,6 +187,7 @@
 
       // Check if the user's age is below 30 and healthy range
       if (age < 30 && averageHeartRate >= 100 && averageHeartRate <= 170) {
+        document.getElementById('heartRateForm').style.display = 'none';
         document.getElementById('analysis1').style.display = 'block';
       } else {
         // Here you can handle the submission, e.g., save to Firebase or process further
