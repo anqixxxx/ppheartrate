@@ -115,6 +115,16 @@
     </div>
   </div>
 
+  <style>
+  .cloud {
+    padding: 20px;
+    border: 1px solic #ccc;
+    border-radius: 25px;
+    background-color: #f9f9f9;
+    margin-bottom: 20px;
+  }
+  </style>
+
   <div id="analysis1" style="display: none;">
     <div class="container">
       <div class="header">
@@ -122,17 +132,26 @@
         <p id="analysis1-user-name">Great job, [User's Name]! Your current heart rate is within the healthy range.</p>
       </div>
       <div class="content">
-        <h2 id="analysis1-heart-rate">Your Current Heart Rate: 72 bpm</h2>
-        <p>A healthy resting heart rate for adults ranges from 60 to 100 beats per minute (bpm).</p>
-        <h2>Why a Healthy Heart Rate is Important:</h2>
-        <p>A healthy heart rate indicates strong cardiovascular health, lowers the risk of heart disease, reflects good overall fitness, and contributes to well-being and longevity.</p>
-        <h2>Keep Up the Good Work!</h2>
-        <p>Continue engaging in regular physical activities like walking, jogging, or cycling. Maintain a balanced diet rich in fruits, vegetables, lean proteins, and whole grains. Stay hydrated and practice stress-relieving activities such as yoga, meditation, or deep breathing exercises.</p>
-        <h2>Stay Motivated and Keep Moving!</h2>
-        <p>Share your achievements with friends and family to stay motivated. Challenge yourself by setting new fitness goals and tracking your progress. Join a fitness community or group to find support and motivation from like-minded individuals.</p>
-        <h2>Learn More About Heart Health:</h2>
-        <p>Read our article on '10 Tips for Maintaining a Healthy Heart' for more information.</p>
-      </div>
+        <div class="cloud">
+            <h2 id="analysis1-heart-rate">Your Current Heart Rate: 72 bpm</h2>
+            <p>A healthy resting heart rate for adults ranges from 60 to 100 beats per minute (bpm).</p>
+        </div>
+        <div class="cloud">
+            <h2>Why a Healthy Heart Rate is Important:</h2>
+            <p>A healthy heart rate indicates strong cardiovascular health, lowers the risk of heart disease, reflects good overall fitness, and contributes to well-being and longevity.</p>
+        </div>
+        <div class="cloud">
+            <h2>Keep Up the Good Work!</h2>
+            <p>Continue engaging in regular physical activities like walking, jogging, or cycling. Maintain a balanced diet rich in fruits, vegetables, lean proteins, and whole grains. Stay hydrated and practice stress-relieving activities such as yoga, meditation, or deep breathing exercises.</p>
+        </div>
+        <div class="cloud">
+            <h2>Stay Motivated and Keep Moving!</h2>
+            <p>Share your achievements with friends and family to stay motivated. Challenge yourself by setting new fitness goals and tracking your progress. Join a fitness community or group to find support and motivation from like-minded individuals.</p>
+        </div>
+        <div class="cloud">
+            <h2>Learn More About Heart Health:</h2>
+            <p>Visit <a href="https://www.healthline.com/health/healthy-heart-tips" target="_blank">'Your Guide to Improving Your Heart Health'</a> for health tips!</p>      </div>
+        </div>
       <div class="cta">
         <a href="#" class="btn">Keep Monitoring Your Health</a>
       </div>
@@ -148,7 +167,7 @@
     </div>
   </div>
 
-        <script>
+    <script>
     // Handle heart rate form submission
     document.getElementById('heartRateForm').addEventListener('submit', function (e) {
       e.preventDefault();
