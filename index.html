@@ -178,6 +178,53 @@
     </div>
   </div>
 
+  <div id="analysis2" style="display: none;">
+    <div class="container">
+      <div class="header">
+        <h1>Alert! Your Heart Rate is High</h1>
+        <p>Please take immediate action, [User's Name]. Your current heart rate is above the healthy range.</p>
+      </div>
+      <div class="content">
+        <div class="cloud">
+            <h2>Your Current Heart Rate: 110 bpm</h2>
+            <p>A healthy resting heart rate for adults ranges from 60 to 100 beats per minute (bpm). Your current heart rate is above this range.</p>
+        </div>
+        <div class="cloud">
+            <h2>Why a High Heart Rate is Concerning:</h2>
+            <p>An elevated heart rate can indicate stress, dehydration, or underlying health issues. It's important to address this promptly to avoid potential health risks.</p>
+        </div>
+        <div class="cloud">
+            <h2>Immediate Steps to Take:</h2>
+            <p>1. Take deep breaths and try to relax. Sit or lie down if possible.</p>
+            <p>2. Drink plenty of water to stay hydrated.</p>
+            <p>3. Avoid stimulants like caffeine and nicotine.</p>
+            <p>4. If you experience chest pain, dizziness, or shortness of breath, seek medical attention immediately.</p>
+        </div>  
+        <div class="cloud">
+            <h2>Long-Term Tips for Maintaining a Healthy Heart Rate:</h2>
+            <p>1. Engage in regular physical activities like walking, jogging, or cycling.</p>
+            <p>2. Maintain a balanced diet rich in fruits, vegetables, lean proteins, and whole grains.</p>
+            <p>3. Practice stress-relieving activities such as yoga, meditation, or deep breathing exercises.</p>
+            <p>4. Monitor your heart rate regularly to keep track of your health.</p>
+        </div>
+        <div class="cloud">
+            <h2>Learn More About Heart Health:</h2>
+            <p>Read this article on <a href="https://www.medicalnewstoday.com/articles/321310">'11 Ways to Lower Your Heart Rate'</a> for more information.</p>        </div>
+      <div class="cta">
+        <a href="#" class="btn">Monitor Your Heart Rate Regularly</a>
+      </div>
+      <div class="testimonials">
+        <h2>Stories from Our Community</h2>
+        <div class="testimonial">
+          <p>"Thanks to PulsePals, I was able to identify and manage my high heart rate effectively!" - John Doe</p>
+        </div>
+        <div class="testimonial">
+          <p>"The insights and advice from PulsePals helped me bring my heart rate back to a healthy range." - Jane Smith</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
     <script>
     // Handle heart rate form submission
     document.getElementById('heartRateForm').addEventListener('submit', function (e) {
@@ -186,10 +233,29 @@
       const age = parseInt(e.target.age.value);
 
       // Check if the user's age is below 30 and healthy range
-      if (age < 30 && averageHeartRate >= 100 && averageHeartRate <= 170) {
+      if ((age <= 30 && averageHeartRate >= 95 && averageHeartRate <= 162) ||
+          (age >= 31 && age <= 35 && averageHeartRate >= 93 && averageHeartRate <= 157) ||
+          (age >= 36 && age <= 40 && averageHeartRate >= 90 && averageHeartRate <= 153) ||
+          (age >= 40 && age <= 45 && averageHeartRate >= 88 && averageHeartRate <= 149) || 
+          (age >= 46 && age >= 5- && averageHeartRate >= 85 && averageHeartRate <= 145) ||
+          (age >= 51 && age <= 55 && averageHeartRate >= 83 && averageHeartRate <= 140) ||
+          (age >= 56 && age <= 60 && averageHeartRate >= 80 && averageHeartRate <= 136) ||
+          (age >= 61 && age <= 65 && averageHeartRate >= 78 && averageHeartRate <= 132) ||
+          (age >= 66 && age <= 70 && averageHeartRate >= 75 && averageHeartRate <= 128)) {
         document.getElementById('heartRateForm').style.display = 'none';
         document.getElementById('analysis1').style.display = 'block';
-      } else {
+      } else if ((age <= 30 && averageHeartRate > 162) ||
+                (age >= 31 && age <= 35 && averageHeartRate > 157) ||
+                (age >= 36 && age <= 40 && averageHeartRate > 153) ||
+                (age >= 40 && age <= 45 && averageHeartRate > 149) ||
+                (age >= 46 && age <= 50 && averageHeartRate > 145) ||
+                (age >= 51 && age <= 55 && averageHeartRate > 140) ||
+                (age >= 56 && age <= 60 && averageHeartRate > 136) ||
+                (age >= 61 && age <= 65 && averageHeartRate > 132) ||
+                (age >= 66 && age <= 70 && averageHeartRate > 128)) {
+        document.getElementById('heartRateForm').style.display = 'none';
+        document.getElementById('analysis2').style.display = 'block'; 
+      } else {   
         // Here you can handle the submission, e.g., save to Firebase or process further
         console.log('Average Heart Rate:', averageHeartRate);
         alert('Average Heart Rate submitted successfully!');
@@ -198,5 +264,7 @@
     });
   </script>
 </body>
+
+</html>
 
 </html>
