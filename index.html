@@ -105,32 +105,17 @@
         <form id="heartRateForm">
           <label for="averageHeartRate">Average Heart Rate (bpm):</label>
           <input type="number" id="averageHeartRate" name="averageHeartRate" required><br><br>
+          
+          <label for="age">Age:</label>
+          <input type="number" id="age" name="age" required><br><br>
+
           <button type="submit" class="btn">Submit</button>
         </form>
       </div>
     </div>
   </div>
 
-  <!-- Firebase initialization script -->
-  <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-analytics.js"></script>
-  <script>
-    // Your web app's Firebase configuration
-    const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_AUTH_DOMAIN",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_STORAGE_BUCKET",
-      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-      appId: "YOUR_APP_ID",
-      measurementId: "YOUR_MEASUREMENT_ID"
-    };
-
-    // Initialize Firebase
-    const app = firebase.initializeApp(firebaseConfig);
-    const analytics = firebase.analytics(app);
-
+    <script>
     // Handle heart rate form submission
     document.getElementById('heartRateForm').addEventListener('submit', function (e) {
       e.preventDefault();
