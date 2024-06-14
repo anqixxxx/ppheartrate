@@ -148,16 +148,22 @@
     </div>
   </div>
 
-    <script>
+        <script>
     // Handle heart rate form submission
     document.getElementById('heartRateForm').addEventListener('submit', function (e) {
       e.preventDefault();
       const averageHeartRate = parseInt(e.target.averageHeartRate.value);
+      const age = parseInt(e.target.age.value);
 
-      // Here you can handle the submission, e.g., save to Firebase or process further
-      console.log('Average Heart Rate:', averageHeartRate);
-      alert('Average Heart Rate submitted successfully!');
-      // Redirect or perform further actions as needed
+      // Check if the user's age is below 30 and healthy range
+      if (age > 30 && averageHeartRate >= 100 && averageHeartRate <= 170) {
+        document.getElementById('analysis1').style.display = 'block';
+      } else {
+        // Here you can handle the submission, e.g., save to Firebase or process further
+        console.log('Average Heart Rate:', averageHeartRate);
+        alert('Average Heart Rate submitted successfully!');
+        // Redirect or perform further actions as needed
+      }
     });
   </script>
 </body>
