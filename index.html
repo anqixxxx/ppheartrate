@@ -156,7 +156,7 @@
       const age = parseInt(e.target.age.value);
 
       // Check if the user's age is below 30 and healthy range
-      if (age > 30 && averageHeartRate >= 100 && averageHeartRate <= 170) {
+      if (age < 30 && averageHeartRate >= 100 && averageHeartRate <= 170) {
         document.getElementById('analysis1').style.display = 'block';
       } else {
         // Here you can handle the submission, e.g., save to Firebase or process further
