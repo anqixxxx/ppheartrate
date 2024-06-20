@@ -278,20 +278,22 @@
       analysis2.style.display = "none";
       analysis3.style.display = "none";
 
-      if ((userAge >= 18 && userAge <= 25 && heartRate >= 50 && heartRate <= 70) ||
-          (userAge >= 26 && userAge <= 35 && heartRate >= 60 && heartRate <= 80) ||
-          (userAge >= 36 && userAge <= 45 && heartRate >= 70 && heartRate <= 90) ||
-          (userAge >= 46 && userAge <= 55 && heartRate >= 72 && heartRate <= 92) ||
-          (userAge >= 56 && userAge <= 65 && heartRate >= 74 && heartRate <= 94) ||
-          (userAge > 65 && heartRate >= 76 && heartRate <= 96)) {
+      if ((userAge >= 0 && userAge <= 19 && heartRate >= 60 && heartRate <= 100) ||
+          (userAge >= 20 && userAge <= 29 && heartRate >= 100 && heartRate <= 170) ||
+          (userAge >= 30 && userAge <= 39 && heartRate >= 93 && heartRate <= 162) ||
+          (userAge >= 40 && userAge <= 49 && heartRate >= 88 && heartRate <= 153) ||
+          (userAge >= 50 && userAge <= 59 && heartRate >= 83 && heartRate <= 145) ||
+          (userAge >= 60 && userAge <= 69 && heartRate >= 78 && heartRate <= 136) ||
+          (userAge >= 70 && heartRate >= 75 && heartRate <= 128)) {
         userHeartRate1.textContent = "Your Current Heart Rate: " + heartRate + " bpm";
         analysis1.style.display = "block";
-      } else if ((userAge >= 18 && userAge <= 25 && heartRate > 70) ||
-                 (userAge >= 26 && userAge <= 35 && heartRate > 80) ||
-                 (userAge >= 36 && userAge <= 45 && heartRate > 90) ||
-                 (userAge >= 46 && userAge <= 55 && heartRate > 92) ||
-                 (userAge >= 56 && userAge <= 65 && heartRate > 94) ||
-                 (userAge > 65 && heartRate > 96)) {
+      } else if ((userAge >= 0 && userAge <= 19 && heartRate > 100) ||
+                 (userAge >= 20 && userAge <= 29 && heartRate > 170) ||
+                 (userAge >= 30 && userAge <= 39 && heartRate > 162) ||
+                 (userAge >= 40 && userAge <= 49 && heartRate > 153) ||
+                 (userAge >= 50 && userAge <= 59 && heartRate > 145) ||
+                 (userAge >= 60 && userAge <= 69 && heartRate > 136) ||
+                 (userAge >= 70 && heartRate > 128)) {
         userHeartRate2.textContent = "Your Current Heart Rate: " + heartRate + " bpm";
         analysis2.style.display = "block";
       } else {
