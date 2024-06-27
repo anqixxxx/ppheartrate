@@ -163,7 +163,7 @@
             <p>Visit <a href="https://www.healthline.com/health/healthy-heart-tips" target="_blank">'Your Guide to Improving Your Heart Health'</a> for health tips!</p>      </div>
         </div>
       <div class="cloud">
-        <a href="#" class="btn">Keep Monitoring Your Health</a>
+        <button id="nextButton1" class="btn">Next (Track Your Steps)</button>
       </div>
       <div class="testimonials">
         <h2>Inspiring Stories from Our Community</h2>
@@ -211,7 +211,7 @@
             <p>Visit <a href="https://www.healthline.com/health/high-heart-rate" target="_blank">'Understanding and Managing a High Heart Rate'</a> for health tips!</p> 
         </div>
         <div class="cloud">
-          <a href="#" class="btn">Take Action for Your Heart Health</a>
+          <button id="nextButton2" class="btn">Next (Track Your Steps)</button>
         </div>
       </div>
     </div>
@@ -250,7 +250,7 @@
             <p>Visit <a href="https://www.healthline.com/health/low-heart-rate" target="_blank">'Understanding and Managing a Low Heart Rate'</a> for health tips!</p> 
         </div>
         <div class="cloud">
-          <a href="#" class="btn">Take Action for Your Heart Health</a>
+          <button id="nextButton3" class="btn">Next (Track Your Steps)</button>
         </div>
       </div>
     </div>
@@ -301,6 +301,19 @@
         analysis3.style.display = "block";
       }
     });
+
+    document.getElementById('nextButton1').addEventListener('click', function() {
+      window.location.href = 'https://your-url.com'; // replace with your URL
+    });
+
+    document.getElementById('nextButton2').addEventListener('click', function() {
+      window.location.href = 'https://your-url.com'; // replace with your URL
+    });
+
+    document.getElementById('nextButton3').addEventListener('click', function() {
+      window.location.href = 'https://your-url.com'; // replace with your URL
+    });
+
   </script>
 </body>
 
