@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +12,6 @@
       padding: 0;
       background-color: #ffffff;
     }
-
     .container {
       max-width: 1200px;
       margin: 20px auto;
@@ -22,33 +20,27 @@
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       border-radius: 5px;
     }
-
     .header {
       text-align: center;
       margin-bottom: 20px;
     }
-
     .logo {
       width: 150px;
       margin-bottom: 10px;
     }
-
     .header h1 {
       font-family: 'Times New Roman', Times, serif;
       color: #003366;
     }
-
     .header p {
       font-size: 1.2em;
       color: #666;
       font-family: 'Great Vibes', cursive;
     }
-
     .content {
       text-align: center;
       margin-bottom: 30px;
     }
-
     .form-container {
       max-width: 400px;
       margin: 0 auto;
@@ -57,13 +49,11 @@
       box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
       background-color: #cfe2ff;
     }
-
     label {
       display: block;
       margin-bottom: 10px;
       color: #003366;
     }
-
     input[type="number"] {
       width: 100%;
       padding: 8px;
@@ -72,7 +62,6 @@
       border: 1px solid #ccc;
       box-sizing: border-box;
     }
-
     .btn {
       display: block;
       width: 100%;
@@ -85,7 +74,6 @@
       transition: background-color 0.3s ease;
       text-align: center;
     }
-
     .btn:hover {
       background-color: #001a33;
     }
@@ -108,7 +96,6 @@
           
           <label for="age">Age:</label>
           <input type="number" id="age" name="age" required><br><br>
-
           <button type="submit" class="btn">Submit</button>
         </form>
       </div>
@@ -125,7 +112,6 @@
     color: white;
   }
   </style>
-
   <style>
   .cloud a {
     color: #FFD700; /* Gold color for better visibility */
@@ -135,7 +121,6 @@
     color: #FFD700; /* Gold color for visited links */
   }
   </style>
-
   <div id="analysis1" style="display: none;">
     <div class="container">
       <div class="header">
@@ -163,7 +148,7 @@
             <p>Visit <a href="https://www.healthline.com/health/healthy-heart-tips" target="_blank">'Your Guide to Improving Your Heart Health'</a> for health tips!</p>      </div>
         </div>
       <div class="cloud">
-        <button id="nextButton1" class="btn">Next (Track Your Steps)</button>
+        <a href="#" class="btn">Keep Monitoring Your Health</a>
       </div>
       <div class="testimonials">
         <h2>Inspiring Stories from Our Community</h2>
@@ -211,7 +196,7 @@
             <p>Visit <a href="https://www.healthline.com/health/high-heart-rate" target="_blank">'Understanding and Managing a High Heart Rate'</a> for health tips!</p> 
         </div>
         <div class="cloud">
-          <button id="nextButton2" class="btn">Next (Track Your Steps)</button>
+          <a href="#" class="btn">Take Action for Your Heart Health</a>
         </div>
       </div>
     </div>
@@ -250,7 +235,7 @@
             <p>Visit <a href="https://www.healthline.com/health/low-heart-rate" target="_blank">'Understanding and Managing a Low Heart Rate'</a> for health tips!</p> 
         </div>
         <div class="cloud">
-          <button id="nextButton3" class="btn">Next (Track Your Steps)</button>
+          <a href="#" class="btn">Take Action for Your Heart Health</a>
         </div>
       </div>
     </div>
@@ -259,25 +244,19 @@
   <script>
     document.getElementById("heartRateForm").addEventListener("submit", function(event) {
       event.preventDefault();
-
       var averageHeartRate = document.getElementById("averageHeartRate").value;
       var age = document.getElementById("age").value;
-
       var analysis1 = document.getElementById("analysis1");
       var analysis2 = document.getElementById("analysis2");
       var analysis3 = document.getElementById("analysis3");
-
       var userHeartRate1 = document.getElementById("user-heart-rate1");
       var userHeartRate2 = document.getElementById("user-heart-rate2");
       var userHeartRate3 = document.getElementById("user-heart-rate3");
-
       var heartRate = parseInt(averageHeartRate, 10);
       var userAge = parseInt(age, 10);
-
       analysis1.style.display = "none";
       analysis2.style.display = "none";
       analysis3.style.display = "none";
-
       if ((userAge >= 0 && userAge <= 19 && heartRate >= 60 && heartRate <= 100) ||
           (userAge >= 20 && userAge <= 29 && heartRate >= 100 && heartRate <= 170) ||
           (userAge >= 30 && userAge <= 39 && heartRate >= 93 && heartRate <= 162) ||
@@ -301,20 +280,6 @@
         analysis3.style.display = "block";
       }
     });
-
-    document.getElementById('nextButton1').addEventListener('click', function() {
-      window.location.href = https://steps-taken.vercel.app/
-    });
-
-    document.getElementById('nextButton2').addEventListener('click', function() {
-      window.location.href = https://steps-taken.vercel.app/
-    });
-
-    document.getElementById('nextButton3').addEventListener('click', function() {
-      window.location.href = https://steps-taken.vercel.app/
-    });
-
   </script>
 </body>
-
 </html>
