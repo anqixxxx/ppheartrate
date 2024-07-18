@@ -78,6 +78,41 @@
       background-color: #001a33;
     }
   </style>
+  
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+    import { getAuth } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+    import { getFirestore } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDf4yaXsG9ShvlAX4IVdGIPqPAypttqlPI",
+      authDomain: "pulsepals-fa684.firebaseapp.com",
+      projectId: "pulsepals-fa684",
+      storageBucket: "pulsepals-fa684.appspot.com",
+      messagingSenderId: "332323808828",
+      appId: "1:332323808828:web:926868c9d76ab22a8ac539",
+      measurementId: "G-ZLJM10C0BD"      
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    let currentUser = null;
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      currentUser = user;
+    } else {
+      // User is signed out
+      // Redirect to login or signup page
+      window.location.href = 'https://html-starter-six-livid.vercel.app/'; // Replace with your login page
+    }
+  });
+
+  </script>
 </head>
 
 <body>
@@ -242,7 +277,7 @@
   </div>
 
   <script>
-    document.getElementById("heartRateForm").addEventListener("submit", function(event) {
+    document.getElementById("heartRateForm").addEventListener("submit", async function(event) {
       event.preventDefault();
       var averageHeartRate = document.getElementById("averageHeartRate").value;
       var age = document.getElementById("age").value;
@@ -257,6 +292,7 @@
       analysis1.style.display = "none";
       analysis2.style.display = "none";
       analysis3.style.display = "none";
+        
       if ((userAge >= 0 && userAge <= 19 && heartRate >= 60 && heartRate <= 100) ||
           (userAge >= 20 && userAge <= 29 && heartRate >= 100 && heartRate <= 170) ||
           (userAge >= 30 && userAge <= 39 && heartRate >= 93 && heartRate <= 162) ||
@@ -279,6 +315,27 @@
         userHeartRate3.textContent = "Your Current Heart Rate: " + heartRate + " bpm";
         analysis3.style.display = "block";
       }
+      
+      // Save data to Firestore
+      if (currentUser) {
+        const userDocRef = doc(db, "users", currentUser.uid);
+        try {
+          await setDoc(userDocRef, { heartRate, age }, { merge: true });
+          document.getElementById("feedback").textContent = "Data saved successfully!";
+          
+          // Save the heart rate to a separate collection
+          const docRef = await addDoc(collection(db, 'heartRates'), {
+            heartRate: heartRate,
+            timestamp: serverTimestamp()
+          });
+          console.log('Heart rate saved with ID:', docRef.id);
+        } catch (error) {
+          console.error("Error saving document: ", error);
+          document.getElementById("feedback").textContent = "Error saving data.";
+        }
+      } else {
+        document.getElementById("feedback").textContent = "User not authenticated.";
+      }
     });
 
     document.getElementById('nextButton1').addEventListener('click', function() {
@@ -295,4 +352,3 @@
   </script>
 </body>
 </html>
-
