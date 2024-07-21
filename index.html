@@ -82,8 +82,9 @@
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
     import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-    import { getFirestore, doc, setDoc, addDoc, collection, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
-    
+    import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+
+    // Your web app's Firebase configuration
     const firebaseConfig = {
       apiKey: "AIzaSyAo6ziHFthGBRE3cZd8EC-Ukds8ztyMzFQ",
       authDomain: "pulsepals-c211c.firebaseapp.com",
@@ -93,40 +94,205 @@
       appId: "1:475129408953:web:1913c2d4083c1452079a68",
       measurementId: "G-YPSX5VFFG5"
     };
-    
+
+    // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
-    
+
     let currentUser = null;
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      currentUser = user;
+    } else {
+      // User is signed out
+      // Redirect to login or signup page
+      window.location.href = 'https://html-starter-six-livid.vercel.app/'; // Replace with your login page
+    }
+  });
+
+  </script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      &#10084; <!-- Heart Icon -->
+      <h1>PulsePals</h1>
+      <p>Your Health Companion</p>
+    </div>
+    <div class="content">
+      <div class="form-container">
+        <h2>Enter Your Average Heart Rate</h2>
+        <form id="heartRateForm">
+          <label for="averageHeartRate">Average Heart Rate (bpm):</label>
+          <input type="number" id="averageHeartRate" name="averageHeartRate" required><br><br>
+          
+          <label for="age">Age:</label>
+          <input type="number" id="age" name="age" required><br><br>
+          <button type="submit" class="btn">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <style>
+  .cloud {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #003366;
+    margin-bottom: 20px;
+    color: white;
+  }
+  </style>
+  <style>
+  .cloud a {
+    color: #FFD700; /* Gold color for better visibility */
+  }
     
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        currentUser = user;
-      } else {
-        console.log('User is not signed in.');
-      }
-    });
-    
+  .cloud a:visited {
+    color: #FFD700; /* Gold color for visited links */
+  }
+  </style>
+  <div id="analysis1" style="display: none;">
+    <div class="container">
+      <div class="header">
+        <h1>Congratulations! Your Heart Rate is Healthy</h1>
+        <p id="analysis1-user-name">Great job! Your current heart rate is within the healthy range.</p>
+      </div>
+      <div class="content">
+        <div class="cloud">
+            <h2 id="user-heart-rate1">Your Current Heart Rate: 72 bpm</h2>
+            <p>A healthy resting heart rate for adults ranges from 60 to 100 beats per minute (bpm).</p>
+        </div>
+        <div class="cloud">
+            <p>A healthy heart rate indicates strong cardiovascular health, lowers the risk of heart disease, reflects good overall fitness, and contributes to well-being and longevity.</p>
+        </div>
+        <div class="cloud">
+            <h2>Keep Up the Good Work!</h2>
+            <p>Continue engaging in regular physical activities like walking, jogging, or cycling. Maintain a balanced diet rich in fruits, vegetables, lean proteins, and whole grains. Stay hydrated and practice stress-relieving activities such as yoga, meditation, or deep breathing exercises.</p>
+        </div>
+        <div class="cloud">
+            <h2>Stay Motivated and Keep Moving!</h2>
+            <p>Share your achievements with friends and family to stay motivated. Challenge yourself by setting new fitness goals and tracking your progress. Join a fitness community or group to find support and motivation from like-minded individuals.</p>
+        </div>
+        <div class="cloud">
+            <h2>Learn More About Heart Health:</h2>
+            <p>Visit <a href="https://www.healthline.com/health/healthy-heart-tips" target="_blank">'Your Guide to Improving Your Heart Health'</a> for health tips!</p>      </div>
+        </div>
+      <div class="cloud">
+        <button id="nextButton1" class="btn">Next (Track Your Steps)</button>
+      </div>
+      <div class="testimonials">
+        <h2>Inspiring Stories from Our Community</h2>
+        <div class="testimonial">
+          <p>"Thanks to PulsePals, I've been able to keep my heart rate in check and feel healthier than ever!" - John Doe</p>
+        </div>
+        <div class="testimonial">
+          <p>"The personalized insights and tips have been incredibly helpful on my fitness journey." - Jane Smith</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="analysis2" style="display: none;">
+    <div class="container">
+      <div class="header">
+        <h1>Alert! Your Heart Rate is High</h1>
+        <p>Your current heart rate is above the healthy range.</p>
+      </div>
+      <div class="content">
+        <div class="cloud">
+            <h2 id="user-heart-rate2">Your Current Heart Rate: 110 bpm</h2>
+            <p>Your current heart rate is above the healthy range.</p>
+        </div>
+        <div class="cloud">
+            <h2>Why a High Heart Rate is Concerning:</h2>
+            <p>An elevated heart rate can indicate stress, dehydration, or underlying health issues. It's important to address this promptly to avoid potential health risks.</p>
+        </div>
+        <div class="cloud">
+            <h2>Immediate Steps to Take:</h2>
+            <p>1. Take deep breaths and try to relax. Sit or lie down if possible.</p>
+            <p>2. Drink plenty of water to stay hydrated.</p>
+            <p>3. Avoid stimulants like caffeine and nicotine.</p>
+            <p>4. If you experience chest pain, dizziness, or shortness of breath, seek medical attention immediately.</p>
+        </div>  
+        <div class="cloud">
+            <h2>Long-Term Tips for Maintaining a Healthy Heart Rate:</h2>
+            <p>1. Engage in regular physical activities like walking, jogging, or cycling.</p>
+            <p>2. Maintain a balanced diet rich in fruits, vegetables, lean proteins, and whole grains.</p>
+            <p>3. Practice stress-relieving activities such as yoga, meditation, or deep breathing exercises.</p>
+            <p>4. Monitor your heart rate regularly to track your progress.</p>
+        </div>
+        <div class="cloud">
+            <h2>Learn More About Managing Your Heart Rate:</h2>
+            <p>Visit <a href="https://www.healthline.com/health/high-heart-rate" target="_blank">'Understanding and Managing a High Heart Rate'</a> for health tips!</p> 
+        </div>
+        <div class="cloud">
+          <button id="nextButton2" class="btn">Next (Track Your Steps)</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="analysis3" style="display: none;">
+    <div class="container">
+      <div class="header">
+        <h1>Alert! Your Heart Rate is Low</h1>
+        <p>Your current heart rate is below the healthy range.</p>
+      </div>
+      <div class="content">
+        <div class="cloud">
+            <h2 id="user-heart-rate3">Your Current Heart Rate: 50 bpm</h2>
+            <p>Your current heart rate is below the healthy range.</p>
+        </div>
+        <div class="cloud">
+            <h2>Why a Low Heart Rate is Concerning:</h2>
+            <p>A low heart rate can indicate good physical fitness in athletes, but it can also suggest an issue with the heart's electrical system, particularly in non-athletes. It's important to address this to avoid potential health risks.</p>
+        </div>
+        <div class="cloud">
+            <h2>Immediate Steps to Take:</h2>
+            <p>1. Take deep breaths and try to relax. Sit or lie down if possible.</p>
+            <p>2. Drink plenty of water to stay hydrated.</p>
+            <p>3. If you experience dizziness, fatigue, or fainting, seek medical attention immediately.</p>
+        </div>
+        <div class="cloud">
+            <h2>Long-Term Tips for Maintaining a Healthy Heart Rate:</h2>
+            <p>1. Engage in regular physical activities like walking, jogging, or cycling.</p>
+            <p>2. Maintain a balanced diet rich in fruits, vegetables, lean proteins, and whole grains.</p>
+            <p>3. Practice stress-relieving activities such as yoga, meditation, or deep breathing exercises.</p>
+            <p>4. Monitor your heart rate regularly to track your progress.</p>
+        </div>
+        <div class="cloud">
+            <h2>Learn More About Managing Your Heart Rate:</h2>
+            <p>Visit <a href="https://www.healthline.com/health/low-heart-rate" target="_blank">'Understanding and Managing a Low Heart Rate'</a> for health tips!</p> 
+        </div>
+        <div class="cloud">
+          <button id="nextButton3" class="btn">Next (Track Your Steps)</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
     document.getElementById("heartRateForm").addEventListener("submit", async function(event) {
       event.preventDefault();
-      
-      const averageHeartRate = document.getElementById("averageHeartRate").value;
-      const age = document.getElementById("age").value;
-      const heartRate = parseInt(averageHeartRate, 10);
-      const userAge = parseInt(age, 10);
-      
-      const analysis1 = document.getElementById("analysis1");
-      const analysis2 = document.getElementById("analysis2");
-      const analysis3 = document.getElementById("analysis3");
-      const userHeartRate1 = document.getElementById("user-heart-rate1");
-      const userHeartRate2 = document.getElementById("user-heart-rate2");
-      const userHeartRate3 = document.getElementById("user-heart-rate3");
-      
+      var averageHeartRate = document.getElementById("averageHeartRate").value;
+      var age = document.getElementById("age").value;
+      var analysis1 = document.getElementById("analysis1");
+      var analysis2 = document.getElementById("analysis2");
+      var analysis3 = document.getElementById("analysis3");
+      var userHeartRate1 = document.getElementById("user-heart-rate1");
+      var userHeartRate2 = document.getElementById("user-heart-rate2");
+      var userHeartRate3 = document.getElementById("user-heart-rate3");
+      var heartRate = parseInt(averageHeartRate, 10);
+      var userAge = parseInt(age, 10);
       analysis1.style.display = "none";
       analysis2.style.display = "none";
       analysis3.style.display = "none";
-      
+        
       if ((userAge >= 0 && userAge <= 19 && heartRate >= 60 && heartRate <= 100) ||
           (userAge >= 20 && userAge <= 29 && heartRate >= 100 && heartRate <= 170) ||
           (userAge >= 30 && userAge <= 39 && heartRate >= 93 && heartRate <= 162) ||
@@ -150,12 +316,14 @@
         analysis3.style.display = "block";
       }
       
+      // Save data to Firestore
       if (currentUser) {
         const userDocRef = doc(db, "users", currentUser.uid);
         try {
           await setDoc(userDocRef, { heartRate, age }, { merge: true });
-          console.log("Data saved successfully!");
+          document.getElementById("feedback").textContent = "Data saved successfully!";
           
+          // Save the heart rate to a separate collection
           const docRef = await addDoc(collection(db, 'heartRates'), {
             heartRate: heartRate,
             timestamp: serverTimestamp()
@@ -163,60 +331,24 @@
           console.log('Heart rate saved with ID:', docRef.id);
         } catch (error) {
           console.error("Error saving document: ", error);
+          document.getElementById("feedback").textContent = "Error saving data.";
         }
       } else {
-        console.log("User not authenticated.");
+        document.getElementById("feedback").textContent = "User not authenticated.";
       }
     });
-    
+
     document.getElementById('nextButton1').addEventListener('click', function() {
-      window.location.href = 'https://steps-taken.vercel.app/';
+      window.location.href = 'https://steps-taken.vercel.app/'; // replace with your URL
     });
 
     document.getElementById('nextButton2').addEventListener('click', function() {
-      window.location.href = 'https://steps-taken.vercel.app/';
+      window.location.href = 'https://steps-taken.vercel.app/'; // replace with your URL
     });
 
     document.getElementById('nextButton3').addEventListener('click', function() {
-      window.location.href = 'https://steps-taken.vercel.app/';
+      window.location.href = 'https://steps-taken.vercel.app/'; // replace with your URL
     });
   </script>
-</head>
-<body>
-  <div class="container">
-    <div class="header">
-      <img src="https://imgur.com/efY9YxP.png" alt="Logo" class="logo">
-      <h1>PulsePals</h1>
-      <p>Your Health, Our Priority</p>
-    </div>
-    <div class="content">
-      <h2>Input Heart Rate</h2>
-      <div class="form-container">
-        <form id="heartRateForm">
-          <label for="averageHeartRate">Average Heart Rate (bpm):</label>
-          <input type="number" id="averageHeartRate" name="averageHeartRate" required>
-          <label for="age">Age:</label>
-          <input type="number" id="age" name="age" required>
-          <input type="submit" value="Submit" class="btn">
-        </form>
-      </div>
-      <div id="analysis1" style="display: none;">
-        <h3>Your Heart Rate is Normal!</h3>
-        <p id="user-heart-rate1"></p>
-        <button id="nextButton1" class="btn">Proceed</button>
-      </div>
-      <div id="analysis2" style="display: none;">
-        <h3>Your Heart Rate is High!</h3>
-        <p id="user-heart-rate2"></p>
-        <button id="nextButton2" class="btn">Proceed</button>
-      </div>
-      <div id="analysis3" style="display: none;">
-        <h3>Your Heart Rate is Low!</h3>
-        <p id="user-heart-rate3"></p>
-        <button id="nextButton3" class="btn">Proceed</button>
-      </div>
-    </div>
-  </div>
 </body>
 </html>
-
