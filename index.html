@@ -77,6 +77,32 @@
     .btn:hover {
       background-color: #001a33;
     }
+
+    #feedback {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      background-color: #f9f9f9;
+      display: none; /* Hidden by default */
+    }
+
+    #feedback.success {
+      border-color: #4CAF50;
+      background-color: #DFF2BF;
+      color: #4CAF50;
+    }
+
+    #feedback.error {
+      border-color: #f44336;
+      background-color: #FFBABA;
+      color: #f44336;
+    }
+
+    #feedback.warning {
+      border-color: #ff9800;
+      background-color: #FFEFB3;
+      color: #ff9800;
+    }
   </style>
   
   <script type="module">
@@ -123,7 +149,7 @@
           <input type="number" id="age" name="age" required><br><br>
           <button type="submit" class="btn">Submit</button>
         </form>
-        <div id="feedback" style="margin-top: 20px; color: red;"></div> <!-- Feedback message container -->
+        <div id="feedback"></div>
       </div>
     </div>
   </div>
