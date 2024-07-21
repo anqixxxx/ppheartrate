@@ -108,7 +108,7 @@
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
     import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-    import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+    import { getFirestore, doc, setDoc, getDoc, addDoc, collection, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
     // Your web app's Firebase configuration
     const firebaseConfig = {
@@ -338,20 +338,25 @@
         const userDocRef = doc(db, "users", currentUser.uid);
         try {
           await setDoc(userDocRef, { heartRate, age }, { merge: true });
-          document.getElementById("feedback").textContent = "Data saved successfully!";
-          
+
           // Save the heart rate to a separate collection
           const docRef = await addDoc(collection(db, 'heartRates'), {
             heartRate: heartRate,
             timestamp: serverTimestamp()
           });
-          console.log('Heart rate saved with ID:', docRef.id);
+            feedback.textContent = "Data saved successfully!";
+            feedback.classList.add("success");
+            feedback.style.display = "block";
         } catch (error) {
           console.error("Error saving document: ", error);
-          document.getElementById("feedback").textContent = "Error saving data.";
+          feedback.textContent = "Error saving data.";
+          feedback.classList.add("error");
+          feedback.style.display = "block";
         }
       } else {
-        document.getElementById("feedback").textContent = "User not authenticated.";
+        feedback.textContent = "User not authenticated.";
+        feedback.classList.add("warning");
+        feedback.style.display = "block";
       }
     });
 
@@ -369,3 +374,4 @@
   </script>
 </body>
 </html>
+
