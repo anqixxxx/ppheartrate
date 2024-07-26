@@ -105,30 +105,6 @@
     }
   </style>
   
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-    import { getFirestore, doc, setDoc, getDoc, addDoc, collection, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
-
-    // Your web app's Firebase configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyAo6ziHFthGBRE3cZd8EC-Ukds8ztyMzFQ",
-      authDomain: "pulsepals-c211c.firebaseapp.com",
-      projectId: "pulsepals-c211c",
-      storageBucket: "pulsepals-c211c.appspot.com",
-      messagingSenderId: "475129408953",
-      appId: "1:475129408953:web:1913c2d4083c1452079a68",
-      measurementId: "G-YPSX5VFFG5"
-    };
-
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
-
-    let currentUser = null;
-
-  </script>
 </head>
 
 <body>
@@ -293,6 +269,59 @@
     </div>
   </div>
 
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+  
+  <script>
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyAo6ziHFthGBRE3cZd8EC-Ukds8ztyMzFQ",
+      authDomain: "pulsepals-c211c.firebaseapp.com",
+      projectId: "pulsepals-c211c",
+      storageBucket: "pulsepals-c211c.appspot.com",
+      messagingSenderId: "475129408953",
+      appId: "1:475129408953:web:1913c2d4083c1452079a68",
+      measurementId: "G-YPSX5VFFG5"
+    };
+
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    let currentUser = null;
+    
+    // Check for the user token in cookies/local storage
+    function checkUserAuth() {
+      const userToken = Cookies.get('userToken');
+      const userId = Cookies.get('userId');
+      if (userToken && userId) {
+        currentUser = { uid: userId, token: userToken };
+      }
+    }
+
+    // Set the user token in cookies/local storage
+    function setUserAuth(user) {
+      user.getIdToken().then(token => {
+        Cookies.set('userToken', token, { domain: 'yourdomain.com' });
+        Cookies.set('userId', user.uid, { domain: 'yourdomain.com' });
+      });
+    }
+
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        currentUser = user;
+        setUserAuth(user);
+      } else {
+        // Redirect to login page or show a message to the user
+      }
+    });
+
+  </script>
+
   <script>
     document.getElementById("heartRateForm").addEventListener("submit", async function(event) {
       event.preventDefault();
@@ -339,21 +368,26 @@
         try {
           await setDoc(userDocRef, { heartRate, age }, { merge: true });
 
+
           // Save the heart rate to a separate collection
-          const docRef = await addDoc(collection(db, 'heartRates'), {
+          await db.collection('heartRates').add({
             heartRate: heartRate,
-            timestamp: serverTimestamp()
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
           });
-            feedback.textContent = "Data saved successfully!";
-            feedback.classList.add("success");
-            feedback.style.display = "block";
+
+          const feedback = document.getElementById("feedback");
+          feedback.textContent = "Data saved successfully!";
+          feedback.classList.add("success");
+          feedback.style.display = "block";
         } catch (error) {
           console.error("Error saving document: ", error);
+          const feedback = document.getElementById("feedback");
           feedback.textContent = "Error saving data.";
           feedback.classList.add("error");
           feedback.style.display = "block";
         }
       } else {
+        const feedback = document.getElementById("feedback");
         feedback.textContent = "User not authenticated.";
         feedback.classList.add("warning");
         feedback.style.display = "block";
@@ -374,4 +408,3 @@
   </script>
 </body>
 </html>
-
